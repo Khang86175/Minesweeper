@@ -32,7 +32,7 @@ for i in range(1,11):
 print("Welcome to Minesweeper!")
 for i in range(12):
     for j in range(12):
-        print('0',end='')
+        print('0 ',end='')
     print()
 # bắt đầu trò chơi
 step=0
@@ -45,8 +45,8 @@ while True:
 
     # nhập tọa độ muốn đào
     n,m= map(int, input('Enter coordinates (row col): ').split())
-    game_display[n][m] = 1
-    if game_base[n][m] == -1:
+    game_display[n-1][m-1] = 1
+    if game_base[n-1][m-1] == -1:
         print("Game Over! point: ", step)
         break
 
@@ -55,9 +55,10 @@ while True:
     for i in range(12):
         for j in range(12):
             if(game_display[i][j] == 0):
-                print('0',end='')
+                print('0 ',end='')
             elif(game_base[i][j] == 0):
-                print('.',end='')
+                print('. ',end='')
             else:
                 print(game_base[i][j], end='')
+                print(' ', end = '')
         print()
