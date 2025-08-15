@@ -16,8 +16,8 @@ num_bombs = bom
 
 while bom:
     id = random.randint(1,m*n)
-    if game_base[ id//m +1 ][ id%m ] != -1:
-        game_base[ id//m +1][ id%m ] = -1
+    if game_base[ (id-1)//m +1 ][ (id-1)%m+1 ] != -1:
+        game_base[ (id-1)//m +1][ (id-1)%m+1 ] = -1
         bom -= 1
 # đếm số bom xung quanh mỗi ô
 for i in range(1,n+1):
