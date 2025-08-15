@@ -15,9 +15,10 @@ num_bombs = bom
 # tạo bom ngẫu nhiên
 
 while bom:
-    id = random.randint(1,m*n)
-    if game_base[id//m - 1][id - id//m - 1] != -1:
-        game_base[id//m - 1][id - id//m - 1] = -1
+    id = random.randint(m + 4, (m + 1) * (n + 1) - 1)
+    # không lấy dòng đầu và dòng cuối, điều kiện if không lấy 2 cột ở rìa
+    if game_base[id//m][id%(m+2)] != -1 and id%(m+2) != 1 and id%(m+2) != 0:
+        game_base[id//m][id%(m+2)] = -1
         bom -= 1
 # đếm số bom xung quanh mỗi ô
 for i in range(1,n+1):
