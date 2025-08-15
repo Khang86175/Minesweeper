@@ -19,7 +19,6 @@ for i in range(1,n+1):
             game_base[i][j] = -1
             num_bombs += 1
 # đếm số bom xung quanh mỗi ô
-num_bombs = 0
 for i in range(1,n+1):
     for j in range(1,m+1):
         if game_base[i][j] != -1:
@@ -29,8 +28,6 @@ for i in range(1,n+1):
                     if game_base[x][y] == -1:
                         count += 1
             game_base[i][j] = count
-        else:
-            num_bombs += 1
 
 # hiển thị bản đồ ban đầu
 print("Welcome to Minesweeper! ",num_bombs)
