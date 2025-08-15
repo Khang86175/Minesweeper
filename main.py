@@ -10,14 +10,15 @@ hướng dẫn chơi :
 n,m=map(int, input('Enter size of map (n row m col): ').split())
 game_base=[[0 for _ in range(m+2)] for _ in range(n+2)]
 game_display=[[0 for _ in range(m+2)] for _ in range(n+2)]
-num_bombs = 0
-
+bom = input(int())
+num_bombs = bom
 # tạo bom ngẫu nhiên
-for i in range(1,n+1):
-    for j in range(1,m+1):
-        if( random.randint(0,3) == 0):
-            game_base[i][j] = -1
-            num_bombs += 1
+
+while bom:
+    id = random.randint(1,m*n)
+    if game_base[id//m - 1][id - id//m - 1] != -1:
+        game_base[id//m - 1][id - id//m - 1] = -1
+        bom -= 1
 # đếm số bom xung quanh mỗi ô
 for i in range(1,n+1):
     for j in range(1,m+1):
