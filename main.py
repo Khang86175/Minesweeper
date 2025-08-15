@@ -7,10 +7,9 @@ hướng dẫn chơi :
 '''
 # game_base hiện thị full map : bom là -1, số bom xung quanh là số khác
 # game_display hiện thị map đã chơi : 0 là chưa chơi, 1 là đã chơi
-n,m=map(int, input('Enter size of map (n row m col): ').split())
+n,m,bom=map(int, input('Enter size of map (n row m col numbom): ').split())
 game_base=[[0 for _ in range(m+2)] for _ in range(n+2)]
 game_display=[[0 for _ in range(m+2)] for _ in range(n+2)]
-bom = input(int())
 num_bombs = bom
 # tạo bom ngẫu nhiên
 
