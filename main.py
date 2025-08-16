@@ -1,4 +1,6 @@
 import random
+import pygame
+import sys
 '''
 hướng dẫn chơi :
     0 là ô có thể đào
@@ -12,6 +14,15 @@ game_base=[[0 for _ in range(m+2)] for _ in range(n+2)]
 game_display=[[0 for _ in range(m+2)] for _ in range(n+2)]
 num_bombs = bom
 # tạo bom ngẫu nhiên
+
+HEIGHT = n*40
+WIDTH = m*40
+pygame.init()
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Minesweeper")
+clock = pygame.time.Clock()
+font = pygame.font.Font(None, 36)
+texts = [font.render(str(i), True, (255, 255, 255)) for i in range(0, 10)]
 
 while bom:
     id = random.randint(1,m*n)
