@@ -23,22 +23,22 @@ pygame.display.set_caption("Minesweeper")
 clock = pygame.time.Clock()
 font = pygame.font.Font(None, 36)
 texts = [font.render(str(i), True, (255, 255, 255)) for i in range(0, 10)]
-
-while bom:
-    id = random.randint(1,m*n)
-    if game_base[ (id-1)//m +1 ][ (id-1)%m+1 ] != -1:
-        game_base[ (id-1)//m +1][ (id-1)%m+1 ] = -1
-        bom -= 1
-# đếm số bom xung quanh mỗi ô
-for i in range(1,n+1):
-    for j in range(1,m+1):
-        if game_base[i][j] != -1:
-            count = 0
-            for x in range(i-1, i+2):
-                for y in range(j-1, j+2):
-                    if game_base[x][y] == -1:
-                        count += 1
-            game_base[i][j] = count
+def bomb(n,m,bom):
+    while bom:
+        id = random.randint(1,m*n)
+        if game_base[ (id-1)//m +1 ][ (id-1)%m+1 ] != -1:
+            game_base[ (id-1)//m +1][ (id-1)%m+1 ] = -1
+            bom -= 1
+    # đếm số bom xung quanh mỗi ô
+    for i in range(1,n+1):
+        for j in range(1,m+1):
+            if game_base[i][j] != -1:
+                count = 0
+                for x in range(i-1, i+2):
+                    for y in range(j-1, j+2):
+                        if game_base[x][y] == -1:
+                            count += 1
+                game_base[i][j] = count
 
 # hiển thị bản đồ ban đầu
 print("Welcome to Minesweeper! ",num_bombs)
@@ -50,7 +50,9 @@ for i in range(n):
 # bắt đầu trò chơi
 step=0
 while True:
-
+    #sinh bomb và đếm số bomb
+    if step == 0:
+        bomb(n,m,bom)
     # nhập tọa độ muốn đào
     x,y= map(int, input('Enter coordinates (row col): ').split())
     game_display[x][y] = 1
