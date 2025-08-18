@@ -23,11 +23,13 @@ pygame.display.set_caption("Minesweeper")
 clock = pygame.time.Clock()
 font = pygame.font.Font(None, 36)
 texts = [font.render(str(i), True, (255, 255, 255)) for i in range(0, 10)]
-def bomb(n,m,bom):
+def bomb(n,m,bom,xbase,ybase):
     while bom:
         id = random.randint(1,m*n)
-        if game_base[ (id-1)//m +1 ][ (id-1)%m+1 ] != -1:
-            game_base[ (id-1)//m +1][ (id-1)%m+1 ] = -1
+        x=(id-1)//m +1
+        y=(id-1)%m+1
+        if game_base[x][y] != -1 and abs(x-xbase) > 1 and abs(y-ybase) > 1:
+            game_base[x][y] = -1
             bom -= 1
     # đếm số bom xung quanh mỗi ô
     for i in range(1,n+1):
@@ -51,10 +53,13 @@ for i in range(n):
 step=0
 while True:
     #sinh bomb và đếm số bomb
-    if step == 0:
-        bomb(n,m,bom)
+    
     # nhập tọa độ muốn đào
     x,y= map(int, input('Enter coordinates (row col): ').split())
+    
+    if step == 0:
+        bomb(n,m,bom,x,y)
+    
     game_display[x][y] = 1
     if game_base[x][y] == -1:
         print("Game Over! point: ", step)
