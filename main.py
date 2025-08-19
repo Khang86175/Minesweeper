@@ -11,7 +11,7 @@ hướng dẫn chơi :
 # game_display hiện thị map đã chơi : 0 là chưa chơi, 1 là đã chơi
 n,m,bom=map(int, input('Enter size of map (n row m col numbom): ').split())
 game_base=[[0 for _ in range(m+2)] for _ in range(n+2)]
-game_display=[[0 for _ in range(m+2)] for _ in range(n+2)]
+game_display=[[9 for _ in range(m+2)] for _ in range(n+2)]
 num_bombs = bom
 # tạo bom ngẫu nhiên
 
@@ -60,8 +60,8 @@ while True:
     if step == 0:
         bomb(n,m,bom,x,y)
     
-    game_display[x][y] = 1
-    if game_base[x][y] == -1:
+    game_display[x][y] = game_base[x][y]
+    if game_display[x][y] == -1:
         print("Game Over! point: ", step)
         break
 
@@ -69,12 +69,12 @@ while True:
     print("Current map (bombs ", num_bombs, "):")
     for i in range(1,n+1):
         for j in range(1,m+1):
-            if(game_display[i][j] == 0):
+            if(game_display[i][j] == 9):
                 print('0 ',end='')
-            elif(game_base[i][j] == 0):
+            elif(game_display[i][j] == 0):
                 print('. ',end='')
             else:
-                print(game_base[i][j], end='')
+                print(game_display[i][j], end='')
                 print(' ', end = '')
         print()
     
