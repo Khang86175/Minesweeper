@@ -22,9 +22,16 @@ hướng dẫn chơi :
     . là ô đã đào và không có bom xung quanh
     có số khác là ô đã đào và có số bom xung quanh
 '''
+
 # game_base hiện thị full map : bom là -1, số bom xung quanh là số khác
 # game_display hiện thị map đã chơi : 0 là chưa chơi, 1 là đã chơi
+
 n, m, bom = map(int, input('Enter size of map (n row m col numbom): ').split())
+# print('Enter size of map (n row m col numbom): ')
+# n = int(input())
+# m = int(input())
+# bom = int(input())
+
 game_base = [[0 for _ in range(m+2)] for _ in range(n+2)]
 game_display = [[9 for _ in range(m+2)] for _ in range(n+2)]
 num_bombs = bom
@@ -42,7 +49,7 @@ text_lose = pygame.font.Font(None, 72).render("You lose!", True, (255, 255, 255)
 text_lose_rect = text_lose.get_rect(center=(WIDTH // 2, HEIGHT // 2))
 texts = [font.render(str(i), True, (255, 255, 255)) for i in range(0, 10)]
 
-def bomb(n, m, bom, xbase, ybase):
+def generatebom(n, m, bom, xbase, ybase):
     while bom:
         id = random.randint(1, m*n)
         x = (id-1)//m + 1
@@ -69,6 +76,10 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN and game_running == 0 and event.button == 1:
             pos = pygame.mouse.get_pos()
             x = pos[1] // 40 + 1
@@ -90,7 +101,7 @@ while True:
         for i in range(1, n+1):
             for j in range(1, m+1):
                 if(game_display[i][j] == 9):
-                    pygame.draw.rect(screen, (0, 200, 0), ((j-1)*40, (i-1)*40, 40, 40), 0)
+                    pygame.draw.rect(screen, (30, 190, 30), ((j-1)*40, (i-1)*40, 40, 40), 0)
                 elif(game_display[i][j] == 0):
                     pygame.draw.rect(screen, (80, 80, 80), ((j-1)*40, (i-1)*40, 40, 40), 0)
                 else:
