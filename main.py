@@ -48,9 +48,15 @@ text_lose_rect = text_lose.get_rect(center=(WIDTH // 2, HEIGHT // 2))
 COLORS = [(0,0,0), (0,0,255), (0,128,0), (255,0,0), (0,0,128), (128,0,0), (0,128,128), (0,0,0), (128,128,128)]
 texts = [font.render(str(i), True, COLORS[i]) for i in range(9)] # 0 sẽ không dùng
 
-# Load ảnh
-flag=pygame.image.load("assets/flag.png").convert_alpha()
+# Load ảnh cờ
+flag = None
+try:
+    flag = pygame.image.load("assets/flag.png").convert_alpha()
+except (FileNotFoundError, pygame.error):
+    print("Flag image not found, using placeholder.")
+    flag = None # Sẽ vẽ hình chữ nhật đỏ thay thế
 
+# Hàm tạo bom
 def generatebom(n, m, bomb_count, xbase, ybase):
     count = bomb_count
     while count > 0:
@@ -173,7 +179,5 @@ while True:
         for j in range(0, n+1):
             pygame.draw.line(screen, (100, 100, 100), (0, j*CELL_SIZE), (WIDTH, j*CELL_SIZE), 1)
 
-    #text_debug = font.render(f'Steps: {step}', True, (255, 255, 255))
-    #screen.blit(text_debug, (10, 10))
     pygame.display.flip()
     clock.tick(30)
