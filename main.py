@@ -12,8 +12,8 @@ except ImportError:
 
 # --- Nhập dữ liệu an toàn ---
 # numbom = 10% row*col : dễ
-# numbom = 10% row*col : trung bình 
-# numbom = 10% row*col : khó
+# numbom = 15% row*col : trung bình 
+# numbom = 20% row*col : khó
 while True:
     inp = input('Enter size of map (row col numbom,numbum should be <=row*col*0.4): ').split()
     if len(inp) != 3:
@@ -25,8 +25,8 @@ while True:
     print("Invalid input. Please try again.")
 # Setup Game
 CELL_SIZE = 40
-WIDTH = n * CELL_SIZE
-HEIGHT = m * CELL_SIZE
+WIDTH = m * CELL_SIZE
+HEIGHT = n * CELL_SIZE
 game_base = [[0 for _ in range(m+2)] for _ in range(n+2)]
 game_display = [[9 for _ in range(m+2)] for _ in range(n+2)]
 # game_base biểu thị full map : bom là -1, các số còn lại là số bom xung quanh
